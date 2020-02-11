@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app{
+            width: 500px;
+            height: auto;
+            background: red;
+            margin: auto;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .todo{
+            background-color: blue;
+        }
+        .todo>span{
+            width: 100%;
+            color: white;
+            text-align: left;
+            border-bottom: 1px solid white;
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <h1>ToDo</h1>
+       <input type="text" ref="input"><button @click="addTodo">Add todo</button>
+       <div v-for="todo in todos" class="todo">
+          <span>{{todo.id}}. {{todo.title}} <button @click="deleteItem(todo.id)">delete</button></span>
+       </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+          el:'#app',
+          data:{
+              todos:[{id:1, title:`uyqudan  uyg'onish`},
+              {id:2, title:`Yuvinish`},
+              {id:3,title:'Namoz o\'qish'}]
+          },
+          methods:{
+              addTodo:function(event){
+                  this.todos=[...this.todos, {id:this.todos.length+1, title:this.$refs.input.value}]
+              },
+              deleteItem:function(id){
+                  console.log(id)
+                  this.todos=[...this.todos.filter(item=>{return item.id !== id})]
+              }
+          }
+        })
+    </script>
+</body>
+</html>
